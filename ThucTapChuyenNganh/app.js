@@ -1,19 +1,26 @@
 var createError = require('http-errors');
-var express = require('express');//qtr
+var express = require('express');
+const {engine}= require('express-handlebars');
+var app = express();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+app.engine(
+    'hbs',
+    engine( {
+    extname: '.hbs',
+    defaultLayout: 'layouts',
+    partialsDir: path.join(__dirname, 'views','partials'),
+    layoutsDir: path.join(__dirname, 'views', 'layouts'),
+})
+);
 
 var indexRouter = require('./routes/index');
+var adminRouter = require('./routes/admin');
+var shopRouter = require('./routes/shop');
 var usersRouter = require('./routes/users');
-var shopRouter = require('./routes/shop');// tạo link dẫn đến shop
-var singleRouter = require('./routes/single');
-var contactRouter = require('./routes/contact');
-var bestsellerRouter = require('./routes/bestseller');
-var cartRouter = require('./routes/cart');
-var notfindRouter = require('./routes/notfind');
-var checkoutRouter = require('./routes/checkout');
-var app = express();
+const {Router} = require('express');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,19 +33,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/shop', shopRouter);
+app.use('/shop',shopRouter);
+app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
-app.use('/single', singleRouter);
-app.use('/contact', contactRouter);
-app.use('/bestseller', bestsellerRouter);
-app.use('/cart', cartRouter);
-app.use('/notfind',notfindRouter);
-app.use('/checkout', checkoutRouter);
-
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req,
+                 res, next) {
   next(createError(404));
 });
 

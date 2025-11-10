@@ -5,5 +5,4 @@ var router = express.Router();
 router.get('/shop', function(req, res, next) {
     res.render('shop');
 });
-
 module.exports = router;
