@@ -371,6 +371,13 @@ p {
 .header {
   background: #ffffff;
 }
+.hero-section-wrapper-5 .header.sticky .navbar-nav .nav-item a {
+    color: #323450; /* Đổi thành màu chữ tối */
+}
+
+.hero-section-wrapper-5 .header.sticky .header-action a {
+    color: #323450; /* Đổi thành màu chữ tối */
+}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header.header-6 .header-action {
@@ -388,7 +395,7 @@ p {
 
 .header.header-6 .header-action a {
   font-size: 16px;
-  color: #585978;
+  color: white;
   padding: 12px;
 }
 
@@ -485,14 +492,14 @@ p {
 .header.header-6 .navbar-nav .nav-item a {
   font-size: 16px;
   font-weight: 500;
-  color: #585978;
+  color: white;
   transition: all 0.3s ease-out 0s;
   padding: 7px 15px;
   margin: 0 3px;
   position: relative;
   display: inline-block;
   z-index: 1;
-  border: 1px solid transparent;
+  border: 1px solid #ffffff;
   border-radius: 30px;
 }
 
@@ -2391,4 +2398,67 @@ input:focus, textarea:focus, button:focus {
 
 .pr-100 {
   padding-right: 100px;
+}
+
+.header.header-6 .navbar {
+    padding: 10px 0; /* Giảm từ 20px xuống 10px */
+}
+
+/* 2. Giảm kích thước logo */
+.header.header-6 .navbar-brand img {
+    max-width: 100%;  /* Bỏ giới hạn 180px cũ */
+    max-height: 70px; /* <-- Đây là chìa khóa! */
+    width: auto;      /* Để chiều rộng tự động */
+}
+/* =========================
+    CSS CHO HÌNH ẢNH SẢN PHẨM
+================================ */
+
+.single-pricing .product-image {
+    width: 100%;
+    height: 180px; /* Bạn có thể điều chỉnh chiều cao này */
+    margin-bottom: 25px; /* Khoảng cách từ ảnh đến chữ */
+    overflow: hidden;
+    border-radius: 5px; /* Bo góc cho ảnh */
+    background: #f0f0f0; /* Màu nền trong lúc chờ ảnh tải */
+}
+
+.single-pricing .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Giữ tỷ lệ ảnh, 'cover' lấp đầy, 'contain' hiển thị đầy đủ */
+    transition: all 0.3s ease-out 0s;
+}
+
+/* Thêm hiệu ứng đẹp khi di chuột vào thẻ */
+.single-pricing:hover .product-image img {
+    transform: scale(1.1); /* Phóng to ảnh khi hover */
+}
+/* =========================
+    FIX CÁC KHUNG SẢN PHẨM KHÔNG ĐỀU
+================================ */
+
+/* 1. Biến thẻ wrapper thành flex để các thẻ bên trong cao bằng nhau */
+.pricing-active-wrapper .tns-item {
+    display: flex;
+}
+
+/* 2. Biến thẻ sản phẩm thành một flex column */
+.pricing-style-4 .pricing-active .single-pricing {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Quan trọng: Giúp thẻ co giãn 100% */
+}
+
+/* 3. Ra lệnh cho danh sách (ul) lấp đầy không gian trống */
+.pricing-style-4 .pricing-active .single-pricing ul {
+    flex-grow: 1; /* Đây là chìa khóa: Đẩy nút xuống dưới */
+}
+/* =========================
+    THÊM PADDING CHO CONTAINER-FLUID
+================================ */
+
+/* Áp dụng padding cho container-fluid bên trong phần pricing */
+.pricing-style-4 .container {
+    max-width: 1500px; /* <-- Đây là chìa khóa! */
 }

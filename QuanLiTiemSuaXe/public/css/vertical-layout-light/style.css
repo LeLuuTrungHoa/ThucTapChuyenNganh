@@ -21091,9 +21091,11 @@ code {
 
 .card .card-title {
   color: #001737;
-  margin-bottom: 1.5rem;
   text-transform: capitalize;
   font-size: 1.125rem;
+}
+.stat-card .stat-content {
+    margin-left: 1.5rem !important; /* (24px) - Bạn có thể đổi số này */
 }
 
 .card .card-subtitle {
@@ -25939,6 +25941,201 @@ div.tagsinput span.tag a {
   #settings-trigger {
     display: none;
   }
+}
+/* Tùy chỉnh cho các thẻ thống kê */
+.stat-card .icon-wrapper {
+    padding-top:10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Làm icon hình tròn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+}
+
+.stat-card .stat-content .card-title {
+    font-size: 1rem;
+    color: #6c757d; /* Màu xám cho tiêu đề phụ */
+    font-weight: 500;
+}
+
+.stat-card .stat-content .stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #343a40; /* Màu đen cho số */
+}
+
+
+/* Tùy chỉnh màu nền cho icon */
+.icon-wrapper.bg-success { background-color: #198754 !important; }
+.icon-wrapper.bg-primary { background-color: #0d6efd !important; }
+.icon-wrapper.bg-warning { background-color: #ffc107 !important; }
+/* =========================
+    FIX CÁC CỘT KHÔNG ĐỀU
+================================ */
+
+/* Thêm vào .row để kích hoạt chế độ flex */
+.row.match-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Áp dụng cho các cột bên trong .row.match-height */
+.row.match-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ép thẻ .card bên trong cột co giãn 100% */
+.row.match-height > [class*='col-'] .card {
+    flex-grow: 1;
+}
+/* =========================
+    FIX LAYOUT BẢNG LỊCH HẸN
+================================ */
+
+
+
+/* 2. Cho các thẻ trạng thái có kích thước bằng nhau */
+.table-responsive .table .badge {
+    min-width: 120px;  /* Đặt chiều rộng tối thiểu */
+}
+.table-responsive .table td:last-child .btn {
+    min-width: 60px; /* Chiều rộng tối thiểu cho từng nút */
+    margin-right: 5px; /* Khoảng cách giữa các nút */
+    margin-bottom: 5px; /* Để tránh tràn dòng nếu có nhiều nút */
+}
+/* =========================
+    FIX LAYOUT BẢNG KHÁCH HÀNG
+================================ */
+
+/* 1. Cho phép các cột SĐT và Email xuống dòng nếu cần */
+.table-responsive .table th:nth-child(2), /* Cột SĐT */
+.table-responsive .table td:nth-child(2),
+.table-responsive .table th:nth-child(3), /* Cột Email */
+.table-responsive .table td:nth-child(3) {
+    white-space: normal !important; /* Ghi đè 'nowrap' của template */
+}
+
+/* 2. Căn chỉnh cột Hành Động cho đồng đều */
+.table-responsive .table td:last-child {
+    min-width: 170px; /* Tăng chiều rộng cho 2 nút */
+    text-align: center;
+}
+
+.table-responsive .table td:last-child .btn {
+    min-width: 80px; /* Đặt chiều rộng tối thiểu cho nút "Lịch sử" và "Sửa" */
+    margin: 2px;
+}
+/* =========================
+    FIX LAYOUT BẢNG SẢN PHẨM
+================================ */
+
+/* 1. Định dạng ảnh thumbnail trong bảng */
+.product-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px; /* Bo góc ảnh */
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy khung */
+}
+
+/* 2. Cho phép cột Mô Tả được xuống dòng */
+.table-responsive .table th:nth-child(3),
+.table-responsive .table td:nth-child(3) {
+    white-space: normal !important;
+    min-width: 250px; /* Cho cột mô tả rộng hơn 1 chút */
+}
+
+/* 3. Căn chỉnh cột Hành Động */
+.table-responsive .table td:last-child {
+    min-width: 160px;
+    text-align: center;
+}
+
+.table-responsive .table td:last-child .btn {
+    min-width: 70px;
+    margin: 2px;
+}
+
+/* 4. Định dạng khung tải ảnh trong Modal */
+.product-image-upload-wrapper {
+    border: 2px dashed #ced4da;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.product-image-upload-wrapper img {
+    max-height: 300px;
+    width: 100%;
+    object-fit: contain;
+}
+/* =========================
+    FIX LAYOUT BẢNG DỊCH VỤ
+================================ */
+
+/* 1. Căn giữa cột Icon và cho icon lớn hơn */
+.table-responsive .table th:first-child,
+.table-responsive .table td:first-child {
+    text-align: center;
+    vertical-align: middle;
+}
+.table-responsive .table td:first-child .lni {
+    font-size: 2rem; /* Làm icon to rõ */
+}
+
+/* 2. Cho phép cột Mô Tả được xuống dòng */
+.table-responsive .table th:nth-child(3),
+.table-responsive .table td:nth-child(3) {
+    white-space: normal !important;
+    min-width: 300px; /* Cho cột mô tả rộng hơn 1 chút */
+}
+
+/* 3. Căn chỉnh cột Hành Động */
+.table-responsive .table td:last-child {
+    min-width: 170px;
+    text-align: center;
+}
+
+.table-responsive .table td:last-child .btn {
+    min-width: 70px;
+    margin: 2px;
+}
+/* =========================
+    CSS TRANG CÀI ĐẶT
+================================ */
+
+.profile-image-upload-wrapper {
+    position: relative;
+    text-align: center;
+}
+
+.profile-image-upload-wrapper img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid #f0f0f0; /* Thêm viền nhẹ cho ảnh */
+}
+
+/* Ẩn input file gốc */
+.profile-image-upload-wrapper input[type="file"] {
+    display: none;
+}
+
+/* Tạo kiểu cho nút "Tải ảnh mới" */
+.profile-image-upload-wrapper .btn {
+    cursor: pointer;
+}
+/* =========================
+    FIX LOGO BỊ BÓP MÉO Ở NAVBAR
+================================ */
+
+.navbar .navbar-brand img {
+    height: 60px;  /* Đặt chiều cao bạn muốn, ví dụ 40px */
+    width: 60px;     /* QUAN TRỌNG: Để chiều rộng tự động */
+    object-fit: contain; /* Đảm bảo logo vừa vặn, không bị cắt hay méo */
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

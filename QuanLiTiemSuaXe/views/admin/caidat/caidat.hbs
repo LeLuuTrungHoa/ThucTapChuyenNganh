@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+    <div class="page-content-wrapper">
+
+        <div class="row mb-4">
+            <div class="col-lg-12">
+                <h1 class="page-title">Cài Đặt Tài Khoản</h1>
+                <p class="page-subtitle">Quản lý thông tin cá nhân và bảo mật của bạn.</p>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Thông Tin Cá Nhân</h5>
+            </div>
+            <div class="card-body">
+                <form id="profileSettingsForm" action="/admin/profile/update" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <label class="form-label mb-2">Ảnh Đại Diện</label>
+                            <div class="profile-image-upload-wrapper">
+                                <img
+                                        src="{{#if user.avatarUrl}}{{user.avatarUrl}}{{else}}/images/faces/hoa.jpg{{/if}}"
+                                        id="profileImagePreview"
+                                        class="img-fluid rounded-circle mb-3"
+                                        alt="Ảnh đại diện"
+                                >
+
+                                <label for="profileImage" class="btn btn-sm btn-outline-primary">
+                                    <i class="lni lni-upload me-1"></i> Tải ảnh mới
+                                </label>
+                                <input class="form-control d-none" type="file" id="profileImage" name="avatar" accept="image/*">
+                                <small class="d-block mt-2 text-muted">Ảnh JPG, PNG hoặc GIF. Tối đa 2MB.</small>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">Tên Hiển Thị</label>
+                                <input type="text" class="form-control" id="userName" name="name" value="Lê Lưu Trung Hòa" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">Email (Tài khoản đăng nhập)</label>
+                                <input type="email" class="form-control" id="userEmail" name="email" value="leluutrunghoa@example.com" readonly disabled>
+                            </div>
+                            <hr>
+                            <button type="submit" class="btn btn-primary">Lưu Thay Đổi Thông Tin</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Đổi Mật Khẩu</h5>
+            </div>
+            <div class="card-body">
+                <form id="passwordSettingsForm" action="/admin/password/update" method="POST">
+                    <div class ="mb-3">
+                        <label for="currentPassword" class="form-label">Mật Khẩu Hiện Tại</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Mật Khẩu Mới</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Xác Nhận Mật Khẩu Mới</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cập Nhật Mật Khẩu</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-danger mb-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="card-title mb-0">Đăng Xuất</h5>
+            </div>
+            <div class="card-body">
+                <p>Bạn có chắc chắn muốn đăng xuất khỏi tài khoản của mình không?</p>
+                <a href="/logout" class="btn btn-danger">
+                    <i class="lni lni-exit me-2"></i> Đăng Xuất Ngay
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- content-wrapper ends -->

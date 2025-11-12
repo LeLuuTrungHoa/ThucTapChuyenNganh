@@ -1,0 +1,131 @@
+<div class="content-wrapper">
+    <div class="page-content-wrapper">
+
+        <div class="row mb-4">
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title">Quản lý Sản Phẩm</h1>
+
+                </div>
+                <div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                        <i class="lni lni-plus me-2"></i> Thêm Sản Phẩm Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 80px;">Ảnh</th>
+                            <th scope="col">Tên Sản Phẩm</th>
+                            <th scope="col">Mô Tả Ngắn</th>
+                            <th scope="col">Giá Bán</th>
+                            <th scope="col">Tồn Kho</th>
+                            <th scope="col">Hành Động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=Nh%E1%BB%9Bt" alt="Nhớt Motul" class="product-thumb">
+                            </td>
+                            <td><strong>Nhớt Motul 300V</strong></td>
+                            <td>Nhớt tổng hợp 100% công nghệ Ester Core.</td>
+                            <td><strong>350.000 VNĐ</strong></td>
+                            <td><span class="badge bg-success">Còn 55</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                                    <i class="lni lni-pencil"></i> Sửa
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=L%E1%BB%91p" alt="Lốp Michelin" class="product-thumb">
+                            </td>
+                            <td><strong>Lốp Michelin City Grip 2</strong></td>
+                            <td>Bám đường tốt, an toàn khi trời mưa.</td>
+                            <td><strong>1.250.000 VNĐ</strong></td>
+                            <td><span class="badge bg-warning text-dark">Còn 8</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                                    <i class="lni lni-pencil"></i> Sửa
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=Bugi" alt="Bugi" class="product-thumb">
+                            </td>
+                            <td><strong>Bugi NGK Iridium</strong></td>
+                            <td>Đánh lửa mạnh, tăng hiệu suất, tiết kiệm xăng.</td>
+                            <td><strong>180.000 VNĐ</strong></td>
+                            <td><span class="badge bg-danger">Hết Hàng (0)</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                                    <i class="lni lni-pencil"></i> Sửa
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Thêm Sản Phẩm Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newProductForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="productName" class="form-label">Tên Sản Phẩm</label>
+                                <input type="text" class="form-control" id="productName" placeholder="Ví dụ: Nhớt Motul 300V" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productDescription" class="form-label">Mô Tả</label>
+                                <textarea class="form-control" id="productDescription" rows="5" placeholder="Mô tả chi tiết các thông số của sản phẩm..."></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="productPrice" class="form-label">Giá Bán (VNĐ)</label>
+                                    <input type="number" class="form-control" id="productPrice" placeholder="350000" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="productStock" class="form-label">Số Lượng Tồn Kho</label>
+                                    <input type="number" class="form-control" id="productStock" placeholder="0" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Ảnh Sản Phẩm</label>
+                            <div class="product-image-upload-wrapper">
+                                <img src="https://placehold.co/400x400/EBF2FF/323450?text=T%E1%BA%A3i+l%C3%AAn" id="productImagePreview" class="img-fluid rounded mb-2" alt="Ảnh xem trước">
+                                <input class="form-control" type="file" id="productImage" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" form="newProductForm">Lưu Sản Phẩm</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
