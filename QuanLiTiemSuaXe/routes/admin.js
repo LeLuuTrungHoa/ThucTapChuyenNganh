@@ -1,53 +1,83 @@
 var express = require('express');
 var router = express.Router();
+const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
 
-/* GET home page. */
-router.get('/*',function(req,res    ,next){
-    res.app.locals.layout='admin';
+function useAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next(); // Proceed if authenticated
+    } else {
+        res.redirect('/login'); // Redirect to login if authentication fails
+    }
+}
+router.all('/*', useAuthenticated, (req, res, next) => {
+    res.app.locals.layout = 'admin'; // Set layout for admin pages
     next();
 });
-router.get('/',function(req,res    ,next){
-    res.render('admin/index',{title: 'Admin'});
+
+router.get('/logout', function(req, res, next) {
+    req.session.destroy(function(err) {
+        if (err) { return next(err); }
+        console.log("Người dùng đã đăng xuất!");
+        res.redirect('/login');
+    });
 });
-router.get('/category',function(req,res    ,next){
-    res.render('admin/category/category-list',{title: 'Category'});
+
+
+router.use(function(req, res, next) {
+    res.app.locals.layout = 'admin';
+    next();
 });
-router.get('/product',function(req,res    ,next){
-    res.render('admin/product/product-list',{title: 'Product'});
+
+
+router.get('/', function(req, res, next) {
+    res.render('admin/index', { title: 'Admin' });
 });
-router.get('/qlkhachhang',function(req,res    ,next){
-    res.render('admin/datamanagement/qlkhachhang',{title: 'qlKhachHang'});
+
+router.get('/category', function(req, res, next) {
+    res.render('admin/category/category-list', { title: 'Category' });
 });
-router.get('/qlsanpham',function(req,res    ,next){
-    res.render('admin/datamanagement/qlsanpham',{title: 'qlSanPham'});
+
+router.get('/product', function(req, res, next) {
+    res.render('admin/product/product-list', { title: 'Product' });
 });
-router.get('/qldichvu',function(req,res    ,next){
-    res.render('admin/datamanagement/qldichvu',{title: 'qlDichVu'});
+
+router.get('/qlkhachhang', function(req, res, next) {
+    res.render('admin/datamanagement/qlkhachhang', { title: 'qlKhachHang' });
 });
-router.get('/baocao',function(req,res    ,next){
-    res.render('admin/baocao/baocaothongke',{title: 'BaoCao'});
+
+router.get('/qlsanpham', function(req, res, next) {
+    res.render('admin/datamanagement/qlsanpham', { title: 'qlSanPham' });
 });
-router.get('/caidat',function(req,res    ,next){
-    res.render('admin/caidat/caidat',{title: 'CaiDat'});
+
+router.get('/qldichvu', function(req, res, next) {
+    res.render('admin/datamanagement/qldichvu', { title: 'qlDichVu' });
 });
-router.get('/lichhen',function(req,res    ,next){
-    res.render('admin/lichhen/lichhen',{title: 'LichHen'});
+
+router.get('/baocao', function(req, res, next) {
+    res.render('admin/baocao/baocaothongke', { title: 'BaoCao' });
 });
-router.get('/hoadon',function(req,res    ,next){
-    res.render('admin/hoadon/hoadon',{title: 'HoaDon'});
+
+router.get('/caidat', function(req, res, next) {
+    res.render('admin/caidat/caidat', { title: 'CaiDat' });
 });
-// cac trang them
+
+router.get('/lichhen', function(req, res, next) {
+    res.render('admin/lichhen/lichhen', { title: 'LichHen' });
+});
+
+router.get('/hoadon', function(req, res, next) {
+    res.render('admin/hoadon/hoadon', { title: 'HoaDon' });
+});
 router.post('/profile/update', function(req, res, next) {
     console.log("Đã nhận dữ liệu cập nhật profile:", req.body);
     res.redirect('/admin/caidat');
 });
+
 router.post('/password/update', function(req, res, next) {
     console.log("Đã nhận yêu cầu đổi mật khẩu:", req.body);
     res.redirect('/admin/caidat');
 });
-router.get('/logout', function(req, res, next) {
-    console.log("Người dùng đã đăng xuất!");
-    res.redirect('/admin/caidat');
-});
+
 
 module.exports = router;

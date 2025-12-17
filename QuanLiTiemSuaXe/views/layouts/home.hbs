@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Cửa hàng Trung Hòa   </title>
+    <title>Cửa hàng Trung Hòa</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Place favicon.ico in the root directory -->
@@ -20,6 +20,35 @@
         .footer-widget .logo img {
             max-width: 180px;
             height: auto;
+        }
+        /* Tùy chỉnh để các nút Đăng nhập/Đăng ký đẹp hơn */
+        .header-action .auth-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 10px; /* Thêm khoảng cách giữa các nút */
+        }
+        .header-action .auth-btn.login {
+            background-color: transparent;
+            border: 1px solid #1976D2; /* Màu xanh dương nhạt */
+            color: #1976D2;
+        }
+        .header-action .auth-btn.login:hover {
+            background-color: #1976D2;
+            color: white;
+        }
+        .header-action .auth-btn.register {
+            background-color: #5C6BC0; /* Màu tím nhạt */
+            border: 1px solid #5C6BC0;
+            color: white;
+        }
+        .header-action .auth-btn.register:hover {
+            background-color: #3949AB;
+            border-color: #3949AB;
+        }
+        .header-action .auth-btn i {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -87,12 +116,39 @@
                                     <li class="nav-item">
                                         <a class="page-scroll" href="/contact">Liên Hệ</a>
                                     </li>
+                                    {{#if user}}
+                                        <li class="nav-item">
+                                            <a href="/admin" class="auth-btn login" style="border: none;">
+                                                <i class="lni lni-user"></i> Xin chào, <b>{{user.lastName}}</b>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="/logout" class="auth-btn register">
+                                                <i class="lni lni-exit"></i> Đăng xuất
+                                            </a>
+                                        </li>
+
+                                    {{else}}
+                                        <li class="nav-item">
+                                            <a href="/login" class="auth-btn login">
+                                                <i class="lni lni-user"></i> Đăng nhập
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/register" class="auth-btn register">
+                                                <i class="lni lni-pencil"></i> Đăng ký
+                                            </a>
+                                        </li>
+                                    {{/if}}
                                 </ul>
                             </div>
 
                             <div class="header-action d-flex">
-                                <a href="#0"> <i class="lni lni-cart"></i> </a>
+
+                                <a href="/customer"> <i class="lni lni-cart"></i> </a>
                                 <a href="#0"> <i class="lni lni-alarm"></i> </a>
+
                             </div>
                             <!-- navbar collapse -->
                         </nav>
@@ -109,121 +165,114 @@
 
     <!-- ========================= hero-5 start ========================= -->
     <div class="hero-section hero-style-5 img-bg" style="background-image: url('assets/img/hero/hero-5/bg.png')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="hero-content-wrapper">
-                        <h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Cửa Hàng Sửa Xe Trung Hòa</h2>
-                        <p class="mb-30 wow fadeInUp" data-wow-delay=".4s">Layout đồ án thực tập chuyên ngành với sự hướng dẫn từ giảng viên Quirrel Trường, sản phẩm chưa hoàn thiện.</p>
-                        <a href="https://github.com/LeLuuTrungHoa/ThucTapChuyenNganh" class="button button-lg radius-50 wow fadeInUp" data-wow-delay=".6s">Source Code <i class="lni lni-chevron-right"></i> </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 align-self-end">
-                    <div class="hero-image wow fadeInUp" data-wow-delay=".5s">
-                        <img src="assets/img/hero/hero-5/img.png" alt="">
-                    </div>
-                </div>
+
+        <!-- ========================= hero-section-wrapper-6 end ========================= -->
+        {{#if error_message}}
+
+            <div class="alert alert-danger">
+                {{error_message}}
             </div>
-        </div>
-    </div>
-    <!-- ========================= hero-5 end ========================= -->
 
-</section>
-<!-- ========================= hero-section-wrapper-6 end ========================= -->
-{{{body}}}
-<!-- ========================= clients-logo start ========================= -->
-<section class="clients-logo-section pt-100 pb-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="client-logo wow fadeInUp" data-wow-delay=".2s">
-
-                </div>
+        {{/if}}
+        {{#if success_message}}
+            <div class="alert alert-success">
+                {{success_message}}
             </div>
-        </div>
-    </div>
-</section>
-<!-- ========================= clients-logo end ========================= -->
+        {{/if}}
+        {{{body}}}
+        <!-- ========================= clients-logo start ========================= -->
+        <!--<section class="clients-logo-section pt-100 pb-100">-->
+        <!--    <div class="container">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-lg-12">-->
+        <!--                <div class="client-logo wow fadeInUp" data-wow-delay=".2s">-->
 
-<!-- ========================= footer style-4 start ========================= -->
-<footer class="footer footer-style-4">
-    <div class="container">
-        <div class="widget-wrapper">
-            <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
-                        <div class="logo">
-                            <a href="#0"> <img src="assets/img/logo/logo.png" alt="logo"> </a>
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</section>-->
+        <!-- ========================= clients-logo end ========================= -->
+
+        <!-- ========================= footer style-4 start ========================= -->
+        <footer class="footer footer-style-4">
+            <div class="container">
+                <div class="widget-wrapper">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
+                                <div class="logo">
+                                    <a href="#0"> <img src="assets/img/logo/logo.png" alt="logo"> </a>
+                                </div>
+                                <p class="desc">Ưu tiên hàng đầu là trải nghiệm từ khách hàng , cảm ơn bạn đã lựa chọn chúng tôi.</p>
+                                <ul class="socials">
+                                    <li> <a href="https://www.facebook.com/trung.hoa.657992"> <i class="lni lni-facebook-filled"></i> </a> </li>
+                                    <li> <a href="#0"> <i class="lni lni-twitter-filled"></i> </a> </li>
+                                    <li> <a href="#0"> <i class="lni lni-instagram-filled"></i> </a> </li>
+                                    <li> <a href="#0"> <i class="lni lni-linkedin-original"></i> </a> </li>
+                                </ul>
+                            </div>
                         </div>
-                        <p class="desc">Ưu tiên hàng đầu là trải nghiệm từ khách hàng , cảm ơn bạn đã lựa chọn chúng tôi.</p>
-                        <ul class="socials">
-                            <li> <a href="https://www.facebook.com/trung.hoa.657992"> <i class="lni lni-facebook-filled"></i> </a> </li>
-                            <li> <a href="#0"> <i class="lni lni-twitter-filled"></i> </a> </li>
-                            <li> <a href="#0"> <i class="lni lni-instagram-filled"></i> </a> </li>
-                            <li> <a href="#0"> <i class="lni lni-linkedin-original"></i> </a> </li>
-                        </ul>
+                        <div class="col-xl-2 offset-xl-1 col-lg-2 col-md-6 col-sm-6">
+                            <div class="footer-widget wow fadeInUp" data-wow-delay=".3s">
+                                <h6>Liên hệ</h6>
+                                <ul class="links">
+                                    <li> <a href="#0">Trang Chủ</a> </li>
+                                    <li> <a href="#0">Giới Thiệu</a> </li>
+                                    <li> <a href="#0">Dịch Vụ</a> </li>
+                                    <li> <a href="#0">Chứng thực</a> </li>
+                                    <li> <a href="#0">Hợp đồng</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                            <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
+                                <h6>Dịch vụ</h6>
+                                <ul class="links">
+                                    <li> <a href="#0">Thẩm định</a> </li>
+                                    <li> <a href="#0">Thay thế</a> </li>
+                                    <li> <a href="#0">Tư vấn</a> </li>
+                                    <li> <a href="#0">Hỗ trợ</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-6">
+                            <div class="footer-widget wow fadeInUp" data-wow-delay=".5s">
+                                <h6>Download App</h6>
+                                <ul class="download-app">
+                                    <li>
+                                        <a href="#0">
+                                            <span class="icon"><i class="lni lni-apple"></i></span>
+                                            <span class="text">Download on the <b>App Store</b> </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <span class="icon"><i class="lni lni-play-store"></i></span>
+                                            <span class="text">GET IT ON <b>Play Store</b> </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xl-2 offset-xl-1 col-lg-2 col-md-6 col-sm-6">
-                    <div class="footer-widget wow fadeInUp" data-wow-delay=".3s">
-                        <h6>Liên hệ</h6>
-                        <ul class="links">
-                            <li> <a href="#0">Trang Chủ</a> </li>
-                            <li> <a href="#0">Giới Thiệu</a> </li>
-                            <li> <a href="#0">Dịch Vụ</a> </li>
-                            <li> <a href="#0">Chứng thực</a> </li>
-                            <li> <a href="#0">Hợp đồng</a> </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
-                        <h6>Dịch vụ</h6>
-                        <ul class="links">
-                            <li> <a href="#0">Thẩm định</a> </li>
-                            <li> <a href="#0">Thay thế</a> </li>
-                            <li> <a href="#0">Tư vấn</a> </li>
-                            <li> <a href="#0">Hỗ trợ</a> </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6">
-                    <div class="footer-widget wow fadeInUp" data-wow-delay=".5s">
-                        <h6>Download App</h6>
-                        <ul class="download-app">
-                            <li>
-                                <a href="#0">
-                                    <span class="icon"><i class="lni lni-apple"></i></span>
-                                    <span class="text">Download on the <b>App Store</b> </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#0">
-                                    <span class="icon"><i class="lni lni-play-store"></i></span>
-                                    <span class="text">GET IT ON <b>Play Store</b> </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
+                    <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">UIdeck</a> Built-with <a href="https://uideck.com" rel="nofollow" target="_blank">Lindy UI Kit</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
                 </div>
             </div>
-        </div>
-        <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
-            <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">UIdeck</a> Built-with <a href="https://uideck.com" rel="nofollow" target="_blank">Lindy UI Kit</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
-        </div>
-    </div>
-</footer>
-<!-- ========================= footer style-4 end ========================= -->
+        </footer>
+        <!-- ========================= footer style-4 end ========================= -->
 
-<!-- ========================= scroll-top start ========================= -->
-<a href="#" class="scroll-top"> <i class="lni lni-chevron-up"></i> </a>
-<!-- ========================= scroll-top end ========================= -->
+        <!-- ========================= scroll-top start ========================= -->
+        <a href="#" class="scroll-top"> <i class="lni lni-chevron-up"></i> </a>
+        <!-- ========================= scroll-top end ========================= -->
 
 
-<!-- ========================= JS here ========================= -->
-<script src="assets/js/bootstrap-5.0.0-beta1.min.js"></script>
-<script src="assets/js/tiny-slider.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/main.js"></script>
+        <!-- ========================= JS here ========================= -->
+        <script src="assets/js/bootstrap-5.0.0-beta1.min.js"></script>
+        <script src="assets/js/tiny-slider.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/main.js"></script>
 </body>
 </html>

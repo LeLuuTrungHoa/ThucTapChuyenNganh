@@ -8,6 +8,19 @@
             </div>
         </div>
 
+        {{#if success_message}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{success_message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
+        {{#if error_message}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{error_message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
+
         <div class="card shadow-sm mb-4">
             <div class="card-header">
                 <h5 class="card-title mb-0">Thông Tin Cá Nhân</h5>
@@ -35,12 +48,16 @@
 
                         <div class="col-md-8">
                             <div class="mb-3">
-                                <label for="userName" class="form-label">Tên Hiển Thị</label>
-                                <input type="text" class="form-control" id="userName" name="name" value="Lê Lưu Trung Hòa" required>
+                                <label for="userFirstName" class="form-label">Tên</label>
+                                <input type="text" class="form-control" id="userFirstName" name="firstName" value="{{user.firstName}}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userLastName" class="form-label">Họ</label>
+                                <input type="text" class="form-control" id="userLastName" name="lastName" value="{{user.lastName}}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userEmail" class="form-label">Email (Tài khoản đăng nhập)</label>
-                                <input type="email" class="form-control" id="userEmail" name="email" value="leluutrunghoa@example.com" readonly disabled>
+                                <input type="email" class="form-control" id="userEmail" name="email" value="{{user.email}}" readonly disabled>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary">Lưu Thay Đổi Thông Tin</button>
@@ -87,4 +104,3 @@
 
     </div>
 </div>
-<!-- content-wrapper ends -->
