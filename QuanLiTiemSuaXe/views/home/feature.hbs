@@ -1,102 +1,37 @@
-<!-- ========================= feature style-5 start ========================= -->
-<section id="feature1" class="feature-section feature-style-5">
+<section id="feature" class="feature-section feature-style-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-8">
                 <div class="section-title text-center mb-60">
-                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Các Dịnh Vụ Tiêu Biểu</h3>
+                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Các Dịch Vụ Tiêu Biểu</h3>
                     <p class="wow fadeInUp" data-wow-delay=".4s">Đây là tất cả những gì bạn cần</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
-                    <div class="icon">
-                        <i class="lni lni-drop"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Thay Nhớt</h5>
-                        <p>Giúp xe vận hành êm ái, bốc và bền bỉ. Chúng tôi cung cấp các loại nhớt chính hãng phù hợp nhất cho xế yêu của bạn.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
-                    <div class="icon">
-                        <i class="lni lni-spray"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Rửa Xe</h5>
-                        <p>Rửa xe bọt tuyết chuyên nghiệp, làm sạch mọi vết bẩn cứng đầu, trả lại vẻ ngoài sáng bóng như mới cho chiếc xe của bạn.</p>
+            {{#each dichvus}}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
+                        <div class="icon">
+                            <i class="lni lni-cog"></i>
+                            <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h5>{{this.namedv}}</h5>
+                            <p>Giá tham khảo: <strong class="text-primary">{{formatCurrency this.giadv}}</strong></p>
+                            <p>Chúng tôi cam kết mang đến dịch vụ tốt nhất cho quý khách với đội ngũ kỹ thuật viên giàu kinh nghiệm.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    <div class="icon">
-                        <i class="lni lni-checkmark-circle"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Bảo dưỡng</h5>
-                        <p>An tâm trên mọi nẻo đường. Dịch vụ bảo dưỡng định kỳ giúp xe bạn luôn ở trạng thái vận hành tốt và an toàn nhất.</p>
-                    </div>
+            {{else}}
+                <div class="col-12 text-center">
+                    <p>Hiện tại chưa có dữ liệu dịch vụ nào trong hệ thống.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
-                    <div class="icon">
-                        <i class="lni lni-hammer"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Sửa chửa</h5>
-                        <p>Khắc phục mọi sự cố một cách nhanh chóng và chính xác. Đội ngũ kỹ thuật viên giàu kinh nghiệm sẵn sàng hỗ trợ bạn.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
-                    <div class="icon">
-                        <i class="lni lni-cogs"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Phụ Tùng</h5>
-                        <p>Cung cấp đa dạng các loại phụ tùng, linh kiện chính hãng với chất lượng và độ bền được đảm bảo, giá cả cạnh tranh.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    <div class="icon">
-                        <i class="lni lni-phone"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Cứu Hộ</h5>
-                        <p>Đội cứu hộ lưu động của chúng tôi sẵn sàng hỗ trợ khắc phục sự cố tại chỗ hoặc vận chuyển xe của bạn về trung tâm một cách an toàn.</p>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
 
     </div>
 </section>
-<!-- ========================= feature style-5 end ========================= -->

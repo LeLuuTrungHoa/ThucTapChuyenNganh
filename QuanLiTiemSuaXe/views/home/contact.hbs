@@ -1,100 +1,112 @@
-<!-- ========================= contact-style-3 start ========================= -->
-<section id="contact1" class="contact-section contact-style-3">
+<section id="contact" class="contact-section contact-style-3 bg-light py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
+            <div class="col-xxl-6 col-xl-7 col-lg-8">
                 <div class="section-title text-center mb-50">
-                    <h3 class="mb-15">Để lại thông tin của bạn</h3>
-                    <p>Cảm ơn bạn đã liên hệ đến chúng tôi , bạn thật tuyệt vời</p>
+                    <h2 class="mb-15 fw-bold text-dark">Đặt Lịch Hẹn Sửa Chữa</h2>
+                    <p class="text-muted">Tiết kiệm thời gian chờ đợi bằng cách đặt lịch trước với chúng tôi.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="contact-form-wrapper">
-                    <form action="" method="">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="name" name="name" class="form-input" placeholder="Name">
-                                    <i class="lni lni-user"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="email" id="email" name="email" class="form-input" placeholder="Email">
-                                    <i class="lni lni-envelope"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="number" name="number" class="form-input" placeholder="Number">
-                                    <i class="lni lni-phone"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="subject" name="subject" class="form-input" placeholder="Subject">
-                                    <i class="lni lni-text-format"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single-input">
-                                    <textarea name="message" id="message" class="form-input" placeholder="Message" rows="6"></textarea>
-                                    <i class="lni lni-comments-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-button">
-                                    <button type="submit" class="button"> <i class="lni lni-telegram-original"></i> Gửi</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
 
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                    {{#if user}}
+                        <form action="/book-appointment" method="POST">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Họ và Tên</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-user text-primary"></i></span>
+                                        <input type="text" name="name" class="form-control border-start-0 ps-0" value="{{user.firstName}} {{user.lastName}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-phone text-primary"></i></span>
+                                        <input type="tel" name="number" class="form-control border-start-0 ps-0" placeholder="036xxxx601" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Ngày đến cửa hàng</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-calendar text-primary"></i></span>
+                                        <input type="date"
+                                               name="ngayden"
+                                               id="appointmentDate"
+                                               class="form-control border-start-0 ps-0"
+                                               value="{{today}}"
+                                               min="{{today}}"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Giờ đến dự kiến</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-alarm-clock text-primary"></i></span>
+                                        <input type="time" name="gioden" class="form-control border-start-0 ps-0" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-secondary">Loại xe / Tên xe</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-delivery text-primary"></i></span>
+                                        <input type="text" name="subject" class="form-control border-start-0 ps-0" placeholder="Ví dụ: Honda Vision, Yamaha Exciter..." required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-secondary">Tình trạng xe / Yêu cầu sửa chữa</label>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Mô tả chi tiết tình trạng xe của bạn..."></textarea>
+                                </div>
+
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5 radius-30 shadow">
+                                        Xác nhận đặt lịch ngay <i class="lni lni-telegram-original ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    {{else}}
+                        <div class="text-center py-5">
+                            <div class="icon-box mb-3"><i class="lni lni-lock-alt display-4 text-danger"></i></div>
+                            <h4 class="fw-bold">Yêu cầu đăng nhập</h4>
+                            <p>Vui lòng đăng nhập tài khoản khách hàng để đặt lịch hẹn sửa chữa.</p>
+                            <a href="/login" class="btn btn-primary px-4 py-2 mt-3 radius-30">Đăng nhập ngay</a>
+                        </div>
+                    {{/if}}
+                </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="left-wrapper">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-phone"></i>
-                                </div>
-                                <div class="text">
-                                    <p>0333298434</p>
-                                    <p>0364700601</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-envelope"></i>
-                                </div>
-                                <div class="text">
-                                    <p>hoatrung33@gmail.com</p>
-                                    <p>trunghoa6141@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-map-marker"></i>
-                                </div>
-                                <div class="text">
-                                    <p>08, Ấp Bà Chủ , xã Tân Lân , Long An , tỉnh Tây <Ninh></Ninh></p>
-                                </div>
-                            </div>
+                <div class="contact-info-card bg-white p-4 rounded-4 shadow-sm h-100">
+                    <h4 class="fw-bold mb-4 border-bottom pb-2">Thông tin liên hệ</h4>
+                    <div class="info-item d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-phone"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Hotline</small>
+                            <span class="fw-bold">0364 700 601</span>
                         </div>
                     </div>
-
+                    <div class="info-item d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-envelope"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Email hỗ trợ</small>
+                            <span class="fw-bold">hoatrung33@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="info-item d-flex align-items-center">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-map-marker"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Địa chỉ cửa hàng</small>
+                            <span class="fw-bold">08, Ấp Bà Chủ, Tân Lân, Cần Đước, Long An</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- ========================= contact-style-3 end ========================= -->

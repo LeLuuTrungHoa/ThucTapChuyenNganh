@@ -1,3 +1,22 @@
+<style>
+    #profileImagePreview {
+        width: 150px;
+        height: 150px;
+        object-fit: cover; /* Giúp ảnh không bị méo */
+        border: 4px solid #f8f9fa;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-image-upload-wrapper label {
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .profile-image-upload-wrapper label:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+</style>
 <div class="content-wrapper">
     <div class="page-content-wrapper">
 
@@ -26,7 +45,7 @@
                 <h5 class="card-title mb-0">Thông Tin Cá Nhân</h5>
             </div>
             <div class="card-body">
-                <form id="profileSettingsForm" action="/admin/profile/update" method="POST" enctype="multipart/form-data">
+                <form id="profileSettingsForm" action="/admin/caidat/profile" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 text-center">
                             <label class="form-label mb-2">Ảnh Đại Diện</label>
@@ -72,7 +91,7 @@
                 <h5 class="card-title mb-0">Đổi Mật Khẩu</h5>
             </div>
             <div class="card-body">
-                <form id="passwordSettingsForm" action="/admin/password/update" method="POST">
+                <form id="passwordSettingsForm" action="/admin/caidat/password" method="POST">
                     <div class ="mb-3">
                         <label for="currentPassword" class="form-label">Mật Khẩu Hiện Tại</label>
                         <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
@@ -104,3 +123,24 @@
 
     </div>
 </div>
+<script>
+    // 1. Xem trước ảnh đại diện ngay khi chọn file
+    document.getElementById('profileImage').onchange = evt => {
+        const [file] = evt.target.files;
+        if (file) {
+            // Hiển thị ảnh vừa chọn lên khung hình tròn
+            document.getElementById('profileImagePreview').src = URL.createObjectURL(file);
+        }
+    }
+
+    // 2. Kiểm tra mật khẩu khớp nhau trước khi gửi lên server
+    document.getElementById('passwordSettingsForm').onsubmit = function(e) {
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+
+        if (newPass !== confirmPass) {
+            e.preventDefault(); // Chặn gửi form
+            alert('Xác nhận mật khẩu mới không trùng khớp!');
+        }
+    };
+</script>

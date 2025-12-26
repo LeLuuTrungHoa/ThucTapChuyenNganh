@@ -1,17 +1,66 @@
+
+<style>
+    /* Ép bảng tuân thủ độ rộng đã chia */
+    .table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    /* Định nghĩa độ rộng từng cột */
+    .col-img { width: 80px; }
+    .col-name { width: 20%; }
+    .col-desc { width: 25%; }
+    .col-price { width: 15%; }
+    .col-stock { width: 12%; }
+    .col-action { width: 10%; }
+
+    /* Xử lý ảnh sản phẩm bị lệch */
+    .product-thumb {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    /* Căn giữa nội dung theo chiều dọc */
+    .table td, .table th {
+        vertical-align: middle !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; /* Giữ bảng gọn trên 1 dòng */
+    }
+
+    /* Hiện đầy đủ mô tả khi di chuột vào (tùy chọn) */
+    .table td:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+</style>
 <div class="content-wrapper">
     <div class="page-content-wrapper">
 
-        <div class="row mb-4">
-            <div class="col-lg-12 d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="page-title">Quản lý Sản Phẩm</h1>
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1 class="page-title" style="font-size: 1.8rem; font-weight: 700;">Quản lý Sản Phẩm</h1>
+                <p class="text-muted small">Quản lý danh mục phụ tùng và hàng hóa trong kho</p>
+            </div>
+        </div>
 
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8 col-lg-9">
+                <div class="input-group shadow-sm">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="lni lni-search-alt text-muted"></i>
+                    </span>
+                    <input type="text" id="searchInput" class="form-control border-start-0 ps-0"
+                           placeholder="Nhập tên sản phẩm hoặc mã phụ tùng để tìm kiếm nhanh...">
                 </div>
-                <div>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                        <i class="lni lni-plus me-2"></i> Thêm Sản Phẩm Mới
-                    </button>
-                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 text-end">
+                <button class="btn btn-primary w-100 shadow-sm py-2" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <i class="lni lni-plus me-2"></i> Thêm Sản Phẩm Mới
+                </button>
             </div>
         </div>
 
@@ -26,55 +75,33 @@
                             <th scope="col">Mô Tả Ngắn</th>
                             <th scope="col">Giá Bán</th>
                             <th scope="col">Tồn Kho</th>
-                            <th scope="col">Hành Động</th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Xóa</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=Nh%E1%BB%9Bt" alt="Nhớt Motul" class="product-thumb">
-                            </td>
-                            <td><strong>Nhớt Motul 300V</strong></td>
-                            <td>Nhớt tổng hợp 100% công nghệ Ester Core.</td>
-                            <td><strong>350.000 VNĐ</strong></td>
-                            <td><span class="badge bg-success">Còn 55</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                                    <i class="lni lni-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=L%E1%BB%91p" alt="Lốp Michelin" class="product-thumb">
-                            </td>
-                            <td><strong>Lốp Michelin City Grip 2</strong></td>
-                            <td>Bám đường tốt, an toàn khi trời mưa.</td>
-                            <td><strong>1.250.000 VNĐ</strong></td>
-                            <td><span class="badge bg-warning text-dark">Còn 8</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                                    <i class="lni lni-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="https://placehold.co/100x100/EBF2FF/323450?text=Bugi" alt="Bugi" class="product-thumb">
-                            </td>
-                            <td><strong>Bugi NGK Iridium</strong></td>
-                            <td>Đánh lửa mạnh, tăng hiệu suất, tiết kiệm xăng.</td>
-                            <td><strong>180.000 VNĐ</strong></td>
-                            <td><span class="badge bg-danger">Hết Hàng (0)</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
-                                    <i class="lni lni-pencil"></i> Sửa
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i> Xóa</button>
-                            </td>
-                        </tr>
+                        {{#each sanphams}}
+                            <tr>
+                                <td>
+                                    <img src="{{imagesp}}"  class="product-thumb">
+                                </td>
+                                <td><strong>{{namesp}}</strong></td>
+                                <td>{{motasp}}</td>
+                                <td><strong>{{giasp}}</strong></td>
+                                <td><span class="badge bg-success">{{soluongsp}}</span></td>
+                                <td>
+                                    <a href="/admin/datamanagement/qlsanphamEdit/{{_id}}  "><button class="btn btn-sm btn-outline-primary"><i class="lni lni-pencil"></i> Sửa</button></a>
+                                </td>
+                                <td>
+                                    <form action="/admin/datamanagement/qlsanphamDelete/{{_id}}?_method=DELETE" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                            <i class="lni lni-trash"></i> Xóa
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {{/each}}
+
                         </tbody>
                     </table>
                 </div>
@@ -129,3 +156,46 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const tableRows = document.querySelectorAll('tbody tr');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            tableRows.forEach(row => {
+                // Lấy nội dung Tên (cột 2) và Mô tả (cột 3)
+                const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const productDesc = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (productName.includes(searchTerm) || productDesc.includes(searchTerm)) {
+                    row.style.display = ''; // Hiện hàng
+                    row.style.animation = 'fadeIn 0.3s';
+                } else {
+                    row.style.display = 'none'; // Ẩn hàng
+                }
+            });
+
+            // Hiển thị thông báo nếu không tìm thấy kết quả nào
+            checkEmptyResults();
+        });
+
+        function checkEmptyResults() {
+            const visibleRows = Array.from(tableRows).filter(row => row.style.display !== 'none');
+            const existingNoResult = document.getElementById('no-result-row');
+
+            if (visibleRows.length === 0) {
+                if (!existingNoResult) {
+                    const tbody = document.querySelector('tbody');
+                    const noResultRow = document.createElement('tr');
+                    noResultRow.id = 'no-result-row';
+                    noResultRow.innerHTML = `<td colspan="7" class="text-center py-4 text-muted">Không tìm thấy sản phẩm nào khớp với từ khóa.</td>`;
+                    tbody.appendChild(noResultRow);
+                }
+            } else if (existingNoResult) {
+                existingNoResult.remove();
+            }
+        }
+    });
+</script>

@@ -1,0 +1,49 @@
+
+<div class="content-wrapper">
+    <div class="page-content-wrapper">
+
+        <div class="row mb-4">
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title">Quản lý Sản Phẩm</h1>
+
+                </div>
+                <div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                        <a href="/admin/datamanagement/qlsanphamCreate"> <i class="lni lni-plus me-2"></i> Thêm Sản phẩm</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form method="POST" action="/admin/datamanagement/qlsanphamCreate">
+                        <div class="mb-3">
+                            <label for="imagesp" class="form-label">Ảnh</label>
+                            <input name="imagesp" type="text" class="form-control" id="imagesp" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="namesp" class="form-label">Tên</label>
+                            <input name="namesp" type="text" class="form-control" id="namesp" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="motasp" class="form-label">Mô tả</label>
+                            <input name="motasp" type="text" class="form-control" id="motasp" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="giasp" class="form-label">Giá</label>
+                            <input name="giasp" type="text" class="form-control" id="giasp" >
+                        </div>
+                        <div class="mb-3">
+                        <label for="soluongsp" class="form-label">Số lượng</label>
+                        <input name="soluongsp" type="text" class="form-control" id="soluongsp" >
+                        </div>
+                        <button type="submit" class="btn btn-primary">Thêm Sản phẩm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

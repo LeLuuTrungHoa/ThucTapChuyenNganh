@@ -1,0 +1,90 @@
+
+<div class="row text-center mb-3 p-3 bg-light rounded shadow-sm mx-1">
+    <div class="col-4 border-end">
+        <h6 class="text-muted small">TỔNG DOANH THU</h6>
+        <h3 class="text-success fw-bold">{{formatCurrency tongDoanhThu}}</h3>
+    </div>
+    <div class="col-4 border-end">
+        <h6 class="text-muted small">TỔNG SỐ HÓA ĐƠN</h6>
+        <h3 class="text-primary fw-bold">{{soHoaDon}}</h3>
+    </div>
+    <div class="col-4">
+        <h6 class="text-muted small">TRUNG BÌNH/HĐ</h6>
+        <h3 class="text-dark fw-bold">{{formatCurrency trungBinh}}</h3>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-3">Bộ Lọc Thống Kê</h5>
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-6">
+                <div class="btn-group w-100" role="group">
+                    <a href="/admin/baocao?filterType=today" class="btn btn-outline-primary {{#if (eq filterType 'today')}}active{{/if}}">Hôm nay</a>
+                    <a href="/admin/baocao?filterType=week" class="btn btn-outline-primary {{#if (eq filterType 'week')}}active{{/if}}">7 ngày qua</a>
+                    <a href="/admin/baocao?filterType=month" class="btn btn-outline-primary {{#if (eq filterType 'month')}}active{{/if}}">Tháng này</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form action="/admin/baocao" method="GET" class="d-flex gap-2">
+                    <input type="date" name="startDate" class="form-control" value="{{startDate}}">
+                    <input type="date" name="endDate" class="form-control" value="{{endDate}}">
+                    <button type="submit" class="btn btn-primary px-4">Lọc</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white py-3">
+        <h5 class="card-title mb-0">Biểu Đồ Doanh Thu Chi Tiết</h5>
+    </div>
+    <div class="card-body">
+        <div style="position: relative; height: 400px;">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{{chartLabels}}},
+            datasets: [{
+                label: 'Doanh thu (VNĐ)',
+                data: {{{chartData}}},
+                backgroundColor: 'rgba(78, 115, 223, 0.8)',
+                borderColor: '#4e73df',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Cho phép biểu đồ kéo dài theo chiều cao của div bao ngoài
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value.toLocaleString('vi-VN') + ' đ';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return 'Doanh thu: ' + context.raw.toLocaleString('vi-VN') + ' VNĐ';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

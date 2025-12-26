@@ -1,0 +1,205 @@
+<div class="content-wrapper">
+    <div class="page-content-wrapper">
+        <div class="row mb-4">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="page-title">Chỉnh Sửa Hóa Đơn</h1>
+                    <p class="text-muted">Mã HĐ: <strong>{{hoadon._id}}</strong></p>
+                </div>
+                <a href="/admin/hoadon/hoadon" class="btn btn-outline-secondary">Quay lại</a>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form id="editInvoiceForm" method="POST" action="/admin/hoadon/hoadonEdit/{{hoadon._id}}?_method=PUT">
+
+                    <h5 class="mb-3 text-primary"><i class="lni lni-user me-2"></i>1. Thông Tin Khách Hàng</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Tên Khách Hàng</label>
+                            <input name="namekh" type="text" class="form-control" value="{{hoadon.namekh}}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Số Điện Thoại</label>
+                            <input name="sdtkh" type="tel" class="form-control" value="{{hoadon.sdtkh}}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Loại Xe</label>
+                            <input name="loaixe" type="text" class="form-control" value="{{hoadon.loaixe}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Ngày Tạo</label>
+                            <input name="ngaytaohd" type="date" class="form-control"
+                                   value="{{formatDate hoadon.ngaytaohd 'YYYY-MM-DD'}}" required>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h5 class="mb-3 text-primary"><i class="lni lni-cart-full me-2"></i>2. Chi Tiết Hóa Đơn</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label d-block fw-bold">Dịch Vụ (Giữ Ctrl để chọn nhiều)</label>
+                            <select multiple class="form-select w-100" name="selectedServices" id="invServices" size="8" style="min-height: 200px;">
+                                {{#each dichvus}}
+                                    <option value="{{this._id}}" data-price="{{this.giadv}}"
+                                        {{#each ../hoadon.dichvus}}
+                                            {{#ifEquals this._id ../this._id}}selected{{/ifEquals}}
+                                        {{/each}}>
+                                        {{this.namedv}} — ({{formatCurrency this.giadv}})
+                                    </option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label d-block fw-bold">Sản Phẩm / Phụ Tùng (Giữ Ctrl để chọn nhiều)</label>
+                            <select multiple class="form-select w-100" name="selectedProducts" id="invProducts" size="8" style="min-height: 200px;">
+                                {{#each sanphams}}
+                                    <option value="{{this._id}}" data-price="{{this.giasp}}"
+                                        {{#each ../hoadon.sanphams}}
+                                            {{#ifEquals this._id ../this._id}}selected{{/ifEquals}}
+                                        {{/each}}>
+                                        {{this.namesp}} — ({{formatCurrency this.giasp}})
+                                    </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h5 class="mb-3 text-primary"><i class="lni lni-dollar me-2"></i>3. Thanh Toán</h5>
+                    <div class="row align-items-end">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label text-danger fw-bold">Tổng Tiền</label>
+                            <input type="text" class="form-control form-control-lg" id="totalDisplay"
+                                   value="{{formatCurrency hoadon.tienhd}}" readonly
+                                   style="font-weight: bold; color: #dc3545; background-color: #f8f9fa;">
+                            <input type="hidden" name="tienhd" id="totalValue" value="{{hoadon.tienhd}}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Trạng Thái</label>
+                            <select name="trangthaihd" class="form-select">
+                                <option value="Chưa thanh toán" {{#ifEquals hoadon.trangthaihd "Chưa thanh toán"}}selected{{/ifEquals}}>Chưa thanh toán</option>
+                                <option value="Đã thanh toán" {{#ifEquals hoadon.trangthaihd "Đã thanh toán"}}selected{{/ifEquals}}>Đã thanh toán</option>
+                                <option value="Đã hủy" {{#ifEquals hoadon.trangthaihd "Đã hủy"}}selected{{/ifEquals}}>Đã hủy</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Phương Thức</label>
+                            <select name="phuongthuc" class="form-select">
+                                <option value="Tiền mặt" {{#ifEquals hoadon.phuongthuc "Tiền mặt"}}selected{{/ifEquals}}>Tiền mặt</option>
+                                <option value="Chuyển khoản" {{#ifEquals hoadon.phuongthuc "Chuyển khoản"}}selected{{/ifEquals}}>Chuyển khoản</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex gap-2 no-print">
+                        <button type="submit" class="btn btn-success px-4">
+                            <i class="lni lni-save me-2"></i>Lưu Thay đổi
+                        </button>
+                        <a href="/admin/hoadon/hoadon" class="btn btn-outline-secondary px-4">Quay Lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="invoice-print-section" class="d-none d-print-block">
+    <div class="text-center mb-4">
+        <h2 class="text-uppercase">Tiệm Sửa Xe Chuyên Nghiệp</h2>
+        <p>Địa chỉ: 08 Đường Chu Văn An, Ấp Bà Chủ, xã Tân Lân, Tây Ninh | ĐT: 0364700601</p>
+        <hr>
+        <h4>HÓA ĐƠN CHI TIẾT</h4>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6">
+            <p>Khách hàng: <strong>{{hoadon.namekh}}</strong></p>
+            <p>Loại xe: {{hoadon.loaixe}}</p>
+        </div>
+        <div class="col-6 text-end">
+            <p>Ngày in: {{formatDate hoadon.ngaytaohd "DD/MM/YYYY"}}</p>
+            <p>Mã HĐ: #{{hoadon._id}}</p>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr><th>Nội dung yêu cầu / Phụ tùng</th><th class="text-end">Đơn giá</th></tr>
+        </thead>
+        <tbody id="print-table-body"></tbody>
+        <tfoot>
+        <tr>
+            <th class="text-end text-uppercase">Tổng cộng thanh toán:</th>
+            <th class="text-end" id="print-total-price" style="font-size: 1.2rem; color: red;"></th>
+        </tr>
+        </tfoot>
+    </table>
+    <div class="text-center mt-5"><p><em>Cảm ơn Quý khách. Hẹn gặp lại!</em></p></div>
+</div>
+
+<div id="invoice-print-section" class="d-none d-print-block">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nội dung yêu cầu / Phụ tùng</th>
+            <th class="text-end">Đơn giá</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{!-- Đổ dữ liệu Dịch vụ từ database --}}
+        {{#each hoadon.dichvus}}
+            <tr>
+                <td>Dịch vụ: {{this.namedv}}</td>
+                <td class="text-end">{{formatCurrency this.giadv}}</td>
+            </tr>
+        {{/each}}
+
+        {{!-- Đổ dữ liệu Sản phẩm từ database --}}
+        {{#each hoadon.sanphams}}
+            <tr>
+                <td>Phụ tùng: {{this.namesp}}</td>
+                <td class="text-end">{{formatCurrency this.giasp}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th class="text-end text-uppercase">Tổng cộng thanh toán:</th>
+            <th class="text-end" style="font-size: 1.2rem; color: red;">
+                {{formatCurrency hoadon.tienhd}}
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<style>
+    @media print {
+        body * { visibility: hidden; }
+        #invoice-print-section, #invoice-print-section * { visibility: visible; }
+        #invoice-print-section { position: absolute; left: 0; top: 0; width: 100%; display: block !important; }
+        .no-print, .sidebar-wrapper, .top-header { display: none !important; }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const serviceSelect = document.getElementById('invServices');
+        const productSelect = document.getElementById('invProducts');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const totalValue = document.getElementById('totalValue');
+
+        function calculateTotal() {
+            let total = 0;
+            Array.from(serviceSelect.selectedOptions).forEach(opt => total += parseFloat(opt.dataset.price || 0));
+            Array.from(productSelect.selectedOptions).forEach(opt => total += parseFloat(opt.dataset.price || 0));
+            totalDisplay.value = new Intl.NumberFormat('vi-VN').format(total) + ' VNĐ';
+            totalValue.value = total;
+        }
+
+        serviceSelect.addEventListener('change', calculateTotal);
+        productSelect.addEventListener('change', calculateTotal);
+    });
+</script>

@@ -1,162 +1,164 @@
-<div class="content-wrapper">
-    <div class="page-content-wrapper">
+<style>
+    .table-responsive {
+        overflow-x: hidden !important;
+    }
+    .table th, .table td {
+        padding: 0.5rem !important;
+        vertical-align: middle !important;
+        font-size: 0.85rem;
+    }
 
-        <div class="row mb-4">
-            <div class="col-lg-12 d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="page-title">Quản lý Lịch Hẹn</h1>
-                    <p class="page-subtitle">Xem và tạo lịch hẹn mới cho khách hàng.</p>
-                </div>
-                <div>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookingModal">
-                        <i class="lni lni-plus me-2"></i> Tạo lịch hẹn mới
-                    </button>
-                </div>
-            </div>
+    .text-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+<div class="container-fluid py-4">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Quản Lý Lịch Hẹn Sửa Xe</h6>
+            <button type="button" class="btn btn-primary btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#adminBookingModal">
+                <i class="lni lni-plus me-1"></i> Thêm lịch mới
+            </button>
         </div>
-
-        <div class="card shadow-sm mb-4">
-
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs" id="bookingTabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#tab-all" role="tab">Tất Cả (10)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#tab-pending" role="tab">Chờ Xác Nhận (2)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="confirmed-tab" data-bs-toggle="tab" href="#tab-confirmed" role="tab">Đã Xác Nhận (4)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#tab-completed" role="tab">Đã Hoàn Thành (3)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="cancelled-tab" data-bs-toggle="tab" href="#tab-cancelled" role="tab">Đã Huỷ (1)</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover align-middle">
-                        <thead>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0" style="table-layout: fixed; width: 100%;">
+                    <thead class="bg-light">
+                    <tr>
+                        <th style="width: 15%;">Khách hàng</th>
+                        <th style="width: 12%;">SĐT</th>
+                        <th style="width: 14%;">Lịch hẹn</th>
+                        <th style="width: 27%;">Nội dung & Ghi chú</th>
+                        <th style="width: 17%;">Trạng thái</th>
+                        <th style="width: 15%;">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each appointments}}
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Khách Hàng</th>
-                            <th scope="col">Số Điện Thoại</th>
-                            <th scope="col">Dịch Vụ</th>
-                            <th scope="col">Thời Gian Hẹn</th>
-                            <th scope="col">Trạng Thái</th>
-                            <th scope="col">Hành Động</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lê Lưu Trung Hòa</td>
-                            <td>0901378488</td>
-                            <td>Bảo dưỡng toàn diện</td>
-                            <td>14:00, 12/11/2025</td>
-                            <td><span class="badge bg-primary">Đã Xác Nhận</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary"><i class="lni lni-pencil"></i></button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i></button>
+                            <td class="align-middle"><strong>{{this.name}}</strong></td>
+                            <td class="align-middle">{{this.number}}</td>
+                            <td class="align-middle">
+                                <div class="d-flex flex-column">
+                                    <span class="badge bg-info text-white mb-1" style="font-size: 0.7rem;">{{this.ngayden}}</span>
+                                    <i class="lni lni-timer"></i> {{this.gioden}}
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div style="word-wrap: break-word; white-space: normal;">
+                                    <span class="fw-bold text-dark">{{this.subject}}</span><br>
+                                    <small class="text-muted">{{this.message}}</small>
+                                </div>
+                            </td>
+                            <td class="text-center align-middle">
+                                {{!-- PHẦN QUAN TRỌNG: Logic hiển thị Trạng thái --}}
+                                {{#ifEquals this.status "Chờ xác nhận"}}
+                                    <span class="badge bg-warning text-dark w-100 py-2">Chờ xác nhận</span>
+                                {{/ifEquals}}
+
+                                {{#ifEquals this.status "Đã xác nhận"}}
+                                    <span class="badge bg-primary text-white w-100 py-2">Đã xác nhận</span>
+                                {{/ifEquals}}
+
+                                {{#ifEquals this.status "Đã hủy"}}
+                                    <span class="badge bg-danger text-white w-100 py-2">Đã hủy</span>
+                                {{/ifEquals}}
+
+                                {{#ifEquals this.status "Hoàn thành"}}
+                                    <span class="badge bg-success text-white w-100 py-2">Đã xong</span>
+                                {{/ifEquals}}
+                            </td>
+                            <td class="align-middle">
+                                {{!-- PHẦN QUAN TRỌNG: Form Thao tác --}}
+                                <form action="/admin/lichhen/lichhenEdit/{{this._id}}" method="POST">
+                                    <select name="status" onchange="if(confirm('Đổi trạng thái?')) this.form.submit()"
+                                            class="form-select form-select-sm border-primary">
+                                        <option value="" disabled selected>Chọn...</option>
+                                        <option value="Đã xác nhận">Xác nhận</option>
+                                        <option value="Hoàn thành">Xong</option>
+                                        <option value="Đã hủy">Hủy</option>
+                                    </select>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Phobe Kennedy</td>
-                            <td>0916678456</td>
-                            <td>Thay nhớt Motul</td>
-                            <td>15:00, 12/11/2025</td>
-                            <td><span class="badge bg-warning text-dark">Chờ Xác Nhận</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary"><i class="lni lni-pencil"></i></button>
-                                <button class="btn btn-sm btn-outline-danger"><i class="lni lni-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Anh Khôi</td>
-                            <td>0938823789</td>
-                            <td>Sửa phanh Winner X</td>
-                            <td>09:00, 11/11/2025</td>
-                            <td><span class="badge bg-success">Đã Hoàn Thành</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-secondary"><i class="lni lni-eye"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Chị Linh</td>
-                            <td>0983146000</td>
-                            <td>Rửa xe</td>
-                            <td>10:00, 11/11/2025</td>
-                            <td><span class="badge bg-danger">Đã Huỷ</span></td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-secondary"><i class="lni lni-eye"></i></button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    {{/each}}
+                    </tbody>
+                </table>
             </div>
-        </div>
-
-    </div>
-
-    <div class="modal fade" id="addBookingModal" tabindex="-1" aria-labelledby="addBookingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg"> <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addBookingModalLabel">Tạo Lịch Hẹn Mới (Cho Khách Gọi Điện)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="newBookingForm">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="customerName" class="form-label">Tên Khách Hàng</label>
-                            <input type="text" class="form-control" id="customerName" placeholder="Ví dụ: Anh Khôi" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="customerPhone" class="form-label">Số Điện Thoại</label>
-                            <input type="tel" class="form-control" id="customerPhone" placeholder="090..." required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="bookingService" class="form-label">Dịch Vụ</label>
-                        <select class="form-select" id="bookingService" required>
-                            <option value="" selected disabled>-- Chọn dịch vụ --</option>
-                            <option value="1">Thay Nhớt</option>
-                            <option value="2">Rửa Xe</option>
-                            <option value="3">Bảo dưỡng</option>
-                            <option value="4">Sửa chữa</option>
-                            <option value="5">Cứu Hộ</option>
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="bookingDate" class="form-label">Ngày Hẹn</label>
-                            <input type="date" class="form-control" id="bookingDate" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="bookingTime" class="form-label">Giờ Hẹn</label>
-                            <input type="time" class="form-control" id="bookingTime" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="bookingNotes" class="form-label">Ghi Chú (Nếu có)</label>
-                        <textarea class="form-control" id="bookingNotes" rows="3" placeholder="Ví dụ: Xe đi kêu, yêu cầu kiểm tra..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary" form="newBookingForm">Lưu Lịch Hẹn</button>
-            </div>
-        </div>
         </div>
     </div>
 </div>
-<!-- content-wrapper ends -->
+<!--form them-->
+<div class="modal fade" id="adminBookingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Ghi nhận lịch hẹn </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin/lichhen/lichhen" method="POST">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Tên khách hàng</label>
+                            <input type="text" name="name" class="form-control" placeholder="Ví dụ: Anh Tuấn" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Số điện thoại</label>
+                            <input type="tel" name="number" class="form-control" placeholder="0333..." required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Ngày hẹn đến</label>
+                            <input type="date" name="ngayden" id="adminNgayDen" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Giờ hẹn</label>
+                            <select name="gioden" class="form-select" required>
+                                <option value="" disabled selected>-- Chọn khung giờ --</option>
+                                <optgroup label="Buổi sáng">
+                                    <option value="08:00">08:00 AM</option>
+                                    <option value="08:30">08:30 AM</option>
+                                    <option value="09:00">09:00 AM</option>
+                                    <option value="09:30">09:30 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="10:30">10:30 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                </optgroup>
+                                <optgroup label="Buổi chiều">
+                                    <option value="13:30">01:30 PM</option>
+                                    <option value="14:00">02:00 PM</option>
+                                    <option value="14:30">02:30 PM</option>
+                                    <option value="15:00">03:00 PM</option>
+                                    <option value="15:30">03:30 PM</option>
+                                    <option value="16:00">04:00 PM</option>
+                                    <option value="16:30">04:30 PM</option>
+                                    <option value="17:00">05:00 PM</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Loại xe / Nội dung sửa chữa</label>
+                            <input type="text" name="subject" class="form-control" placeholder="Ví dụ: Honda SH - Thay lốp" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Ghi chú thêm (nếu có)</label>
+                            <textarea name="message" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary px-4">Lưu lịch hẹn</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tự động để ngày mặc định là hôm nay
+    document.getElementById('adminNgayDen').value = new Date().toISOString().split('T')[0];
+</script>

@@ -1,0 +1,134 @@
+<div class="content-wrapper">
+    <div class="page-content-wrapper">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="page-title">Tạo Hóa Đơn / Phiếu Sửa Chữa</h1>
+                <p class="text-muted">Vui lòng chọn khách hàng, dịch vụ và sản phẩm để tạo hóa đơn.</p>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form id="newInvoiceForm" method="POST" action="/admin/hoadon/hoadonCreate">
+
+                    <h5 class="mb-3 text-primary"><i class="lni lni-user me-2"></i>1. Thông Tin Khách Hàng</h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="namekh" class="form-label">Tên Khách Hàng</label>
+                            <input name="namekh" type="text" class="form-control" id="namekh" placeholder="Tên khách hàng" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="sdtkh" class="form-label">Số Điện Thoại</label>
+                            <input name="sdtkh" type="tel" class="form-control" id="sdtkh" placeholder="090...">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="loaixe" class="form-label">Loại Xe</label>
+                            <input name="loaixe" type="text" class="form-control" id="loaixe" placeholder="Ví dụ: Vision, Exciter...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="ngaytaohd" class="form-label">Ngày Tạo</label>
+                            <input name="ngaytaohd" type="date" class="form-control" id="ngaytaohd" required>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h5 class="mb-3 text-primary"><i class="lni lni-cart-full me-2"></i>2. Chi Tiết Hóa Đơn</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="invServices" class="form-label d-block">Dịch Vụ</label>
+                            <select multiple class="form-select w-100" name="selectedServices" id="invServices" size="8" style="min-height: 200px;">
+                                {{#each dichvus}}
+                                    <option value="{{this._id}}" data-price="{{this.giadv}}">
+                                        {{this.namedv}} — ({{formatCurrency this.giadv}})
+                                    </option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="invProducts" class="form-label d-block">Sản Phẩm / Phụ Tùng </label>
+                            <select multiple class="form-select w-100" name="selectedProducts" id="invProducts" size="8" style="min-height: 200px;">
+                                {{#each sanphams}}
+                                    <option value="{{this._id}}" data-price="{{this.giasp}}">
+                                        {{this.namesp}} — ({{formatCurrency this.giasp}})
+                                    </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+
+                      <h5 class="mb-3 text-primary"><i class="lni lni-dollar me-2"></i>3. Thanh Toán</h5>
+                    <div class="row align-items-end">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Tổng Tiền</label>
+                            <input type="text" class="form-control form-control-lg" id="totalDisplay" value="0 VNĐ" readonly style="font-weight: bold; color: #dc3545; background-color: #f8f9fa;">
+                            <input type="hidden" name="tienhd" id="totalValue" value="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="trangthaihd" class="form-label">Trạng Thái</label>
+                            <select name="trangthaihd" class="form-select" id="trangthaihd">
+                                <option value="Chưa thanh toán" selected>Chưa Thanh Toán</option>
+                                <option value="Đã thanh toán">Đã Thanh Toán</option>
+                                <option value="Đã hủy">Đã Hủy</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="phuongthuc" class="form-label">Phương Thức</label>
+                            <select name="phuongthuc" class="form-select" id="phuongthuc">
+                                <option value="Tiền mặt" selected>Tiền Mặt</option>
+                                <option value="Chuyển khoản">Chuyển Khoản</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="lni lni-save me-2"></i>Lưu Hóa Đơn
+                        </button>
+                        <a href="/admin/hoadon/hoadon" class="btn btn-outline-secondary px-4">Quay Lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- JAVASCRIPT TÍNH TIỀN TỰ ĐỘNG --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tự động điền ngày hiện tại vào ô ngày tạo
+        document.getElementById('ngaytaohd').valueAsDate = new Date();
+
+        const serviceSelect = document.getElementById('invServices');
+        const productSelect = document.getElementById('invProducts');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const totalValue = document.getElementById('totalValue');
+
+        function calculateTotal() {
+            let total = 0;
+
+            // Tính tiền Dịch vụ
+            Array.from(serviceSelect.selectedOptions).forEach(option => {
+                total += parseFloat(option.getAttribute('data-price') || 0);
+            });
+
+            // Tính tiền Sản phẩm
+            Array.from(productSelect.selectedOptions).forEach(option => {
+                total += parseFloat(option.getAttribute('data-price') || 0);
+            });
+
+            // Định dạng hiển thị VNĐ
+            totalDisplay.value = new Intl.NumberFormat('vi-VN').format(total) + ' VNĐ';
+
+            // Cập nhật giá trị số vào input hidden để gửi lên Server
+            totalValue.value = total;
+        }
+
+        // Lắng nghe sự kiện thay đổi trên cả 2 danh sách chọn
+        serviceSelect.addEventListener('change', calculateTotal);
+        productSelect.addEventListener('change', calculateTotal);
+    });
+</script>

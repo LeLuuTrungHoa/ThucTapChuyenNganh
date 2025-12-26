@@ -3,7 +3,7 @@
         <div class="col-lg-6">
             <div class="hero-content-wrapper">
                 <h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Cửa Hàng Sửa Xe Trung Hòa</h2>
-                <p class="mb-30 wow fadeInUp" data-wow-delay=".4s">Layout đồ án thực tập chuyên ngành với sự hướng dẫn từ giảng viên Quirrel Trường, sản phẩm chưa hoàn thiện.</p>
+                <p class="mb-30 wow fadeInUp" data-wow-delay=".4s">Layout đồ án thực tập chuyên ngành với sự hướng dẫn từ giảng viên Quirrel Trường</p>
                 <a href="https://github.com/LeLuuTrungHoa/ThucTapChuyenNganh" class="button button-lg radius-50 wow fadeInUp" data-wow-delay=".6s">Source Code <i class="lni lni-chevron-right"></i> </a>
             </div>
         </div>
@@ -27,67 +27,36 @@
         <div class="row align-items-center" >
             <div class="col-xl-3 col-lg-4">
                 <div class="section-title mb-60">
-                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Sản Phẩm Nổi Bật</h3>
-                    <p class="wow fadeInUp" data-wow-delay=".4s">Đây là các sản phẩm và dịch vụ được khách hàng ưa chuộng nhất tại cửa hàng chúng tôi.</p>
+                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Phụ Tùng & Sản Phẩm</h3>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">
+                        Cung cấp các loại phụ tùng chính hãng, chất lượng cao cho xe máy của bạn.
+                    </p>
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8">
                 <div class="pricing-active-wrapper wow fadeInUp" data-wow-delay=".4s">
                     <div class="pricing-active">
 
-                        <div class="single-pricing-wrapper">
-                            <div class="single-pricing">
-                                <div class="product-image">
-                                    <img src="https://placehold.co/400x300/EBF2FF/323450?text=Nh%E1%BB%9Bt+Motul" alt="Nhớt Motul">
+                        {{#each sanphams}}
+                            <div class="single-pricing-wrapper">
+                                <div class="single-pricing">
+                                    <div class="product-image">
+                                        {{!-- Hiển thị ảnh placeholder, bạn có thể thay bằng link ảnh thật nếu có --}}
+                                        <img src="https://placehold.co/400x300/EBF2FF/323450?text={{this.namesp}}" alt="{{this.namesp}}">
+                                    </div>
+                                    <h6>Phụ Tùng Chính Hãng</h6>
+                                    <h4>{{this.namesp}}</h4>
+                                    <h3 class="text-danger">{{formatCurrency this.giasp}}</h3>
+                                    <ul>
+                                        <li>Mã sản phẩm: {{this._id}}</li>
+                                        <li>Chất lượng bền bỉ</li>
+                                        <li>Hàng mới 100%</li>
+                                        <li>Hỗ trợ lắp đặt</li>
+                                    </ul>
+                                    <a href="/admin/hoadon/hoadonCreate" class="button radius-30">Mua Ngay</a>
                                 </div>
-                                <h6>Dầu Nhớt</h6>
-                                <h4>Nhớt Motul 300V</h4>
-                                <h3>350.000 VNĐ</h3>
-                                <ul>
-                                    <li>Nhớt tổng hợp 100%</li>
-                                    <li>Công nghệ Ester Core</li>
-                                    <li>Chuyên dùng cho xe côn tay</li>
-                                    <li>Dung tích 1 Lít</li>
-                                </ul>
-                                <a href="#0" class="button radius-30">Xem Chi Tiết</a>
                             </div>
-                        </div>
-
-                        <div class="single-pricing-wrapper">
-                            <div class="single-pricing">
-                                <div class="product-image">
-                                    <img src="https://placehold.co/400x300/EBF2FF/323450?text=L%E1%BB%91p+Michelin" alt="Lốp Michelin">
-                                </div>
-                                <h6>Phụ Tùng</h6>
-                                <h4>Lốp Michelin City Grip 2</h4>
-                                <h3>1.250.000 VNĐ</h3>
-                                <ul>
-                                    <li>Bám đường tốt, an toàn khi trời mưa</li>
-                                    <li>Độ bền cao, lâu mòn</li>
-                                    <li>Thiết kế gai lốp hiện đại</li>
-                                    <li>Dùng cho xe tay ga</li>
-                                </ul>
-                                <a href="#0" class="button radius-30">Xem Chi Tiết</a>
-                            </div>
-                        </div>
-
-                        <div class="single-pricing-wrapper">
-                            <div class="single-pricing">
-                                <div class="product-image">
-                                    <img src="https://placehold.co/400x300/EBF2FF/323450?text=B%E1%BA%A3o+D%C6%B0%E1%BB%A1ng" alt="Gói Bảo Dưỡng">
-                                </div>
-                                <h6>Dịch Vụ</h6>
-                                <h4>Gói Bảo Dưỡng Toàn Diện</h4>
-                                <h3>500.000 VNĐ</h3>
-                                <ul>
-                                    <li>Thay nhớt, vệ sinh nồi (xe ga)</li>
-                                    <li>Kiểm tra hệ thống phanh</li>
-                                    <li>Kiểm tra lọc gió, bugi</li>
-                                    <li>Siết lại toàn bộ ốc vít</li>
-                                </ul>
-                                <a href="#0" class="button radius-30">Đặt Lịch Hẹn</a>
-                            </div>
-                        </div>
+                        {{/each}}
 
                     </div>
                 </div>
@@ -103,97 +72,34 @@
         <div class="row justify-content-center">
             <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-8">
                 <div class="section-title text-center mb-60">
-                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Các Dịnh Vụ Tiêu Biểu</h3>
+                    <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Các Dịch Vụ Tiêu Biểu</h3>
                     <p class="wow fadeInUp" data-wow-delay=".4s">Đây là tất cả những gì bạn cần</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
-                    <div class="icon">
-                        <i class="lni lni-drop"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Thay Nhớt</h5>
-                        <p>Giúp xe vận hành êm ái, bốc và bền bỉ. Chúng tôi cung cấp các loại nhớt chính hãng phù hợp nhất cho xế yêu của bạn.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
-                    <div class="icon">
-                        <i class="lni lni-spray"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Rửa Xe</h5>
-                        <p>Rửa xe bọt tuyết chuyên nghiệp, làm sạch mọi vết bẩn cứng đầu, trả lại vẻ ngoài sáng bóng như mới cho chiếc xe của bạn.</p>
+            {{#each dichvus}}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
+                        <div class="icon">
+                            <i class="lni lni-cog"></i>
+                            <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h5>{{this.namedv}}</h5>
+                            <p>Giá tham khảo: <strong class="text-primary">{{formatCurrency this.giadv}}</strong></p>
+                            <p>Chúng tôi cam kết mang đến dịch vụ tốt nhất cho quý khách với đội ngũ kỹ thuật viên giàu kinh nghiệm.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    <div class="icon">
-                        <i class="lni lni-checkmark-circle"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Bảo dưỡng</h5>
-                        <p>An tâm trên mọi nẻo đường. Dịch vụ bảo dưỡng định kỳ giúp xe bạn luôn ở trạng thái vận hành tốt và an toàn nhất.</p>
-                    </div>
+            {{else}}
+                <div class="col-12 text-center">
+                    <p>Hiện tại chưa có dữ liệu dịch vụ nào trong hệ thống.</p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
-                    <div class="icon">
-                        <i class="lni lni-hammer"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Sửa chửa</h5>
-                        <p>Khắc phục mọi sự cố một cách nhanh chóng và chính xác. Đội ngũ kỹ thuật viên giàu kinh nghiệm sẵn sàng hỗ trợ bạn.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
-                    <div class="icon">
-                        <i class="lni lni-cogs"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Phụ Tùng</h5>
-                        <p>Cung cấp đa dạng các loại phụ tùng, linh kiện chính hãng với chất lượng và độ bền được đảm bảo, giá cả cạnh tranh.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    <div class="icon">
-                        <i class="lni lni-phone"></i>
-                        <svg width="110" height="72" viewBox="0 0 110 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M110 54.7589C110 85.0014 85.3757 66.2583 55 66.2583C24.6243 66.2583 0 85.0014 0 54.7589C0 24.5164 24.6243 0 55 0C85.3757 0 110 24.5164 110 54.7589Z" fill="#EBF4FF"/>
-                        </svg>
-                    </div>
-                    <div class="content">
-                        <h5>Cứu Hộ</h5>
-                        <p>Đội cứu hộ lưu động của chúng tôi sẵn sàng hỗ trợ khắc phục sự cố tại chỗ hoặc vận chuyển xe của bạn về trung tâm một cách an toàn.</p>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
 
     </div>
@@ -224,7 +130,7 @@
                             <!--                            Stop wasting time and money designing and managing a website that doesn’t get results.-->
                             <!--                        </li>-->
                     </ul>
-                    <a href="#0" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".5s">Xem Thêm</a>
+<!--                    <a href="#0" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".5s">Xem Thêm</a>-->
                 </div>
             </div>
             <div class="col-xl-7 col-lg-6">
@@ -237,102 +143,114 @@
 </section>
 <!-- ========================= about style-4 end ========================= -->
 
-
-
 <!-- ========================= contact-style-3 start ========================= -->
-<section id="contact" class="contact-section contact-style-3">
+<section id="contact" class="contact-section contact-style-3 bg-light py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
+            <div class="col-xxl-6 col-xl-7 col-lg-8">
                 <div class="section-title text-center mb-50">
-                    <h3 class="mb-15">Để lại thông tin của bạn</h3>
-                    <p>Cảm ơn bạn đã liên hệ đến chúng tôi , bạn thật tuyệt vời</p>
+                    <h2 class="mb-15 fw-bold text-dark">Đặt Lịch Hẹn Sửa Chữa</h2>
+                    <p class="text-muted">Tiết kiệm thời gian chờ đợi bằng cách đặt lịch trước với chúng tôi.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="contact-form-wrapper">
-                    <form action="" method="">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="name" name="name" class="form-input" placeholder="Name">
-                                    <i class="lni lni-user"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="email" id="email" name="email" class="form-input" placeholder="Email">
-                                    <i class="lni lni-envelope"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="number" name="number" class="form-input" placeholder="Number">
-                                    <i class="lni lni-phone"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="single-input">
-                                    <input type="text" id="subject" name="subject" class="form-input" placeholder="Subject">
-                                    <i class="lni lni-text-format"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single-input">
-                                    <textarea name="message" id="message" class="form-input" placeholder="Message" rows="6"></textarea>
-                                    <i class="lni lni-comments-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-button">
-                                    <button type="submit" class="button"> <i class="lni lni-telegram-original"></i> Gửi</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
 
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                    {{#if user}}
+                        <form action="/book-appointment" method="POST">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Họ và Tên</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-user text-primary"></i></span>
+                                        <input type="text" name="name" class="form-control border-start-0 ps-0" value="{{user.firstName}} {{user.lastName}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-phone text-primary"></i></span>
+                                        <input type="tel" name="number" class="form-control border-start-0 ps-0" placeholder="036xxxx601" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Ngày đến cửa hàng</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-calendar text-primary"></i></span>
+                                        <input type="date"
+                                               name="ngayden"
+                                               id="appointmentDate"
+                                               class="form-control border-start-0 ps-0"
+                                               value="{{today}}"
+                                               min="{{today}}"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-secondary">Giờ đến dự kiến</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-alarm-clock text-primary"></i></span>
+                                        <input type="time" name="gioden" class="form-control border-start-0 ps-0" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-secondary">Loại xe / Tên xe</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-transparent border-end-0"><i class="lni lni-delivery text-primary"></i></span>
+                                        <input type="text" name="subject" class="form-control border-start-0 ps-0" placeholder="Ví dụ: Honda Vision, Yamaha Exciter..." required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-secondary">Tình trạng xe / Yêu cầu sửa chữa</label>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Mô tả chi tiết tình trạng xe của bạn..."></textarea>
+                                </div>
+
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5 radius-30 shadow">
+                                        Xác nhận đặt lịch ngay <i class="lni lni-telegram-original ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    {{else}}
+                        <div class="text-center py-5">
+                            <div class="icon-box mb-3"><i class="lni lni-lock-alt display-4 text-danger"></i></div>
+                            <h4 class="fw-bold">Yêu cầu đăng nhập</h4>
+                            <p>Vui lòng đăng nhập tài khoản khách hàng để đặt lịch hẹn sửa chữa.</p>
+                            <a href="/login" class="btn btn-primary px-4 py-2 mt-3 radius-30">Đăng nhập ngay</a>
+                        </div>
+                    {{/if}}
+                </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="left-wrapper">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-phone"></i>
-                                </div>
-                                <div class="text">
-                                    <p>0333298434</p>
-                                    <p>0364700601</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-envelope"></i>
-                                </div>
-                                <div class="text">
-                                    <p>hoatrung33@gmail.com</p>
-                                    <p>trunghoa6141@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6">
-                            <div class="single-item">
-                                <div class="icon">
-                                    <i class="lni lni-map-marker"></i>
-                                </div>
-                                <div class="text">
-                                    <p>08, Ấp Bà Chủ , xã Tân Lân , Long An , tỉnh Tây <Ninh></Ninh></p>
-                                </div>
-                            </div>
+                <div class="contact-info-card bg-white p-4 rounded-4 shadow-sm h-100">
+                    <h4 class="fw-bold mb-4 border-bottom pb-2">Thông tin liên hệ</h4>
+                    <div class="info-item d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-phone"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Hotline</small>
+                            <span class="fw-bold">0364 700 601</span>
                         </div>
                     </div>
-
+                    <div class="info-item d-flex align-items-center mb-4">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-envelope"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Email hỗ trợ</small>
+                            <span class="fw-bold">hoatrung33@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="info-item d-flex align-items-center">
+                        <div class="icon-circle bg-primary-light text-primary me-3"><i class="lni lni-map-marker"></i></div>
+                        <div>
+                            <small class="text-muted d-block">Địa chỉ cửa hàng</small>
+                            <span class="fw-bold">08, Ấp Bà Chủ, Tân Lân, Cần Đước, Long An</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

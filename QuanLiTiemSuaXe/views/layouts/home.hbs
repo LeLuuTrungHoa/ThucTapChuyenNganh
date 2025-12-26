@@ -17,6 +17,21 @@
     <link rel="stylesheet" href="assets/css/animate.css"/>
     <link rel="stylesheet" href="assets/css/lindy-uikit.css"/>
     <style>
+        .footer-style-4 .footer-widget h6 {
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        /* Tạo gạch chân dưới tiêu đề widget */
+        .footer-style-4 .footer-widget h6::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary); /* Hoặc màu chủ đạo của bạn */
+        }
         .footer-widget .logo img {
             max-width: 180px;
             height: auto;
@@ -114,7 +129,7 @@
                                         <a class="page-scroll" href="/about">Giới Thiệu</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="/contact">Liên Hệ</a>
+                                        <a class="page-scroll" href="/contact">Đặt lịch</a>
                                     </li>
                                     {{#if user}}
                                         <li class="nav-item">
@@ -144,12 +159,12 @@
                                 </ul>
                             </div>
 
-                            <div class="header-action d-flex">
+<!--                            <div class="header-action d-flex">-->
 
-                                <a href="/customer"> <i class="lni lni-cart"></i> </a>
-                                <a href="#0"> <i class="lni lni-alarm"></i> </a>
+<!--                                <a href="/customer"> <i class="lni lni-cart"></i> </a>-->
+<!--                                <a href="#0"> <i class="lni lni-alarm"></i> </a>-->
 
-                            </div>
+<!--                            </div>-->
                             <!-- navbar collapse -->
                         </nav>
                         <!-- navbar -->
@@ -199,12 +214,12 @@
             <div class="container">
                 <div class="widget-wrapper">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                                 <div class="logo">
                                     <a href="#0"> <img src="assets/img/logo/logo.png" alt="logo"> </a>
                                 </div>
-                                <p class="desc">Ưu tiên hàng đầu là trải nghiệm từ khách hàng , cảm ơn bạn đã lựa chọn chúng tôi.</p>
+                                <p class="desc">Ưu tiên hàng đầu là trải nghiệm từ khách hàng, cảm ơn bạn đã lựa chọn dịch vụ của Tiệm sửa xe Trung Hòa.</p>
                                 <ul class="socials">
                                     <li> <a href="https://www.facebook.com/trung.hoa.657992"> <i class="lni lni-facebook-filled"></i> </a> </li>
                                     <li> <a href="#0"> <i class="lni lni-twitter-filled"></i> </a> </li>
@@ -213,32 +228,23 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-2 offset-xl-1 col-lg-2 col-md-6 col-sm-6">
-                            <div class="footer-widget wow fadeInUp" data-wow-delay=".3s">
-                                <h6>Liên hệ</h6>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer-widget wow fadeInUp" data-wow-delay=".3s" style="padding-left: 50px;">
+                                <h6>Liên kết nhanh</h6>
                                 <ul class="links">
-                                    <li> <a href="#0">Trang Chủ</a> </li>
-                                    <li> <a href="#0">Giới Thiệu</a> </li>
-                                    <li> <a href="#0">Dịch Vụ</a> </li>
-                                    <li> <a href="#0">Chứng thực</a> </li>
-                                    <li> <a href="#0">Hợp đồng</a> </li>
+                                    <li> <a href="/"><i class="lni lni-chevron-right me-2"></i>Trang Chủ</a> </li>
+                                    <li> <a href="#about"><i class="lni lni-chevron-right me-2"></i>Giới Thiệu</a> </li>
+                                    <li> <a href="#feature"><i class="lni lni-chevron-right me-2"></i>Dịch Vụ</a> </li>
+                                    <li> <a href="#contact"><i class="lni lni-chevron-right me-2"></i>Đặt Lịch Hẹn</a> </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                            <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
-                                <h6>Dịch vụ</h6>
-                                <ul class="links">
-                                    <li> <a href="#0">Thẩm định</a> </li>
-                                    <li> <a href="#0">Thay thế</a> </li>
-                                    <li> <a href="#0">Tư vấn</a> </li>
-                                    <li> <a href="#0">Hỗ trợ</a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6">
+
+                        <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="footer-widget wow fadeInUp" data-wow-delay=".5s">
-                                <h6>Download App</h6>
+                                <h6>Ứng dụng di động</h6>
+                                <p class="mb-20">Sắp ra mắt trên các nền tảng di động để phục vụ bạn tốt hơn.</p>
                                 <ul class="download-app">
                                     <li>
                                         <a href="#0">
@@ -257,8 +263,11 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
-                    <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">UIdeck</a> Built-with <a href="https://uideck.com" rel="nofollow" target="_blank">Lindy UI Kit</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+                    <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">UIdeck</a>. Built-with <a href="https://uideck.com" rel="nofollow" target="_blank">Lindy UI Kit</a>.
+                        <br>
+                        Cập nhật bởi <strong>Lê Lưu Trung Hòa</strong></p>
                 </div>
             </div>
         </footer>

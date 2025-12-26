@@ -21,7 +21,16 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         minlength: 5,
-    }
+    },
+    avatarUrl: {
+        type: String,
+        default: '/images/faces/hoa.jpg'
+    },
+    role: {
+        type: String,
+        default: 'customer',
+        enum: ['customer', 'admin']
+    },
 });
 
 module.exports = mongoose.models.users || mongoose.model('users', UserSchema);

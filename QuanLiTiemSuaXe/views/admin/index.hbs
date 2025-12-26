@@ -1,22 +1,15 @@
 <div class="page-content-wrapper content-wrapper">
-
+    {{!-- Thống kê tổng quan --}}
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-title">Bảng Điều Khiển</h1>
-        </div>
-    </div>
-
-    <div class="row">
-
         <div class="col-lg-4 col-md-6">
             <div class="card stat-card shadow-sm mb-4">
                 <div class="card-body d-flex align-items-center">
-                    <div class="icon-wrapper bg-success">
+                    <div class="icon-wrapper bg-success text-white p-3 rounded">
                         <i class="lni lni-dollar"></i>
                     </div>
                     <div class="stat-content ms-3">
                         <h5 class="card-title">Doanh Thu Hôm Nay</h5>
-                        <h2 class="stat-number">1.250.000 VNĐ</h2>
+                        <h2 class="stat-number">{{formatCurrency doanhThuHomNay}}</h2>
                     </div>
                 </div>
             </div>
@@ -25,12 +18,12 @@
         <div class="col-lg-4 col-md-6">
             <div class="card stat-card shadow-sm mb-4">
                 <div class="card-body d-flex align-items-center">
-                    <div class="icon-wrapper bg-primary">
+                    <div class="icon-wrapper bg-primary text-white p-3 rounded">
                         <i class="lni lni-cart"></i>
                     </div>
                     <div class="stat-content ms-3">
                         <h5 class="card-title">Tổng Số Đơn Hàng</h5>
-                        <h2 class="stat-number">15</h2>
+                        <h2 class="stat-number">{{tongDonHang}}</h2>
                     </div>
                 </div>
             </div>
@@ -38,86 +31,101 @@
 
         <div class="col-lg-4 col-md-6">
             <div class="card stat-card shadow-sm mb-4">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-wrapper bg-warning">
+                <div class="card-body d-flex align-items-center text-white">
+                    <div class="icon-wrapper bg-warning p-3 rounded">
                         <i class="lni lni-calendar"></i>
                     </div>
                     <div class="stat-content ms-3">
-                        <h5 class="card-title">Lịch Hẹn Mới</h5>
-                        <h2 class="stat-number">4</h2>
+                        <h5 class="card-title text-dark">Lịch Hẹn Mới</h5>
+                        <h2 class="stat-number text-dark">{{lichHenMoi}}</h2>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="row match-height">
 
+    <div class="row match-height">
+        {{!-- Biểu đồ doanh thu --}}
         <div class="col-lg-8">
             <div class="card shadow-sm mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Biểu Đồ Doanh Thu (Tuần)</h5>
-                </div>
+                <div class="card-header bg-white"><h5 class="card-title mb-0">Biểu Đồ Doanh Thu (Tuần)</h5></div>
                 <div class="card-body">
-                    <p>Biểu đồ hiển thị ở đây (ví dụ: dùng Chart.js)</p>
-                    <canvas id="revenueChart" height="150"></canvas>
+                    <div style="height: 300px;"><canvas id="revenueChart"></canvas></div>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4">
-
+            {{!-- Lịch hẹn hôm nay --}}
             <div class="card shadow-sm mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Lịch Hẹn Hôm Nay</h5>
-                </div>
-                <div class="card-body">
+                <div class="card-header bg-white"><h5 class="card-title mb-0">Lịch Hẹn Hôm Nay</h5></div>
+                <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>Anh Khôi</strong>
-                                <small class="d-block text-muted">Bảo dưỡng Winner X</small>
-                            </div>
-                            <span class="badge bg-primary rounded-pill">9:00</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>Chị Linh</strong>
-                                <small class="d-block text-muted">Thay nhớt Vision</small>
-                            </div>
-                            <span class="badge bg-primary rounded-pill">10:30</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>Chú Hùng</strong>
-                                <small class="d-block text-muted">Sửa phanh AirBlade</small>
-                            </div>
-                            <span class="badge bg-primary rounded-pill">14:00</span>
-                        </li>
+                        {{#each lichHenHomNay}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{this.name}}</strong>
+                                    <small class="d-block text-muted text-truncate">{{this.subject}}</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{this.gioden}}</span>
+                            </li>
+                        {{else}}
+                            <li class="list-group-item text-center py-3">Không có lịch hẹn</li>
+                        {{/each}}
                     </ul>
                 </div>
             </div>
 
-            <div class="card shadow-sm mb-4">
-                <div class="card-header">
-                    <h5 class="card-title mb-0 text-danger">Cảnh Báo: Hàng Sắp Hết</h5>
+            {{!-- Cảnh báo kho hàng --}}
+            <div class="card shadow-sm mb-4 border-danger">
+                <div class="card-header bg-white">
+                    <h5 class="card-title mb-0 text-danger">Thông báo: Hàng Sắp Hết</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Nhớt Motul 300V
-                            <span class="badge bg-danger rounded-pill">Còn 5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Lốp Michelin City Grip
-                            <span class="badge bg-danger rounded-pill">Còn 3</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Bugi NGK
-                            <span class="badge bg-warning text-dark rounded-pill">Còn 12</span>
-                        </li>
+                        {{#each sanPhamSapHet}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{this.namesp}}
+                                <span class="badge {{#if (lt this.soluongsp 10)}}bg-danger{{else}}bg-warning text-dark{{/if}} rounded-pill">
+                                Còn {{this.soluongsp}}
+                            </span>
+                            </li>
+                        {{else}}
+                            <li class="list-group-item text-center py-3">Kho hàng đầy đủ</li>
+                        {{/each}}
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-        </div> </div> </div>
+{{!-- Chart.js Script --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{{chartLabels}}},
+            datasets: [{
+                label: 'Doanh thu',
+                data: {{{chartData}}},
+                borderColor: '#4e73df',
+                backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: function(value) { return value.toLocaleString('vi-VN') + 'đ'; } }
+                }
+            }
+        }
+    });
+</script>
